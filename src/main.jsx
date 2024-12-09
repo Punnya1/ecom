@@ -8,10 +8,9 @@ import store from './store/store.js'
 
 
 createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <ScrollToTop />
-      <App />
-    </BrowserRouter>
-  </Provider>
+
+  <BrowserRouter>
+    <ScrollToTop />
+    <App />
+  </BrowserRouter>
 )
