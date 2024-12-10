@@ -1,17 +1,38 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import Button from '@mui/material/Button';
+import { AppContext } from "../Context/createContext"
+import { useContext, useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
+
+
 const Product = () => {
+    const navigate = useNavigate()
     const [product, setProducts] = useState([])
     const { id } = useParams()
+    const [isAddedToCart, setIsAddedToCart] = useState(false)
+    const { setQuantity, cartItems, setCartItems } = useContext(AppContext);
+
     const fetchProduct = async () => {
         const response = await axios.get(`https://fakestoreapi.com/products/${id}`)
         setProducts(response.data)
+        if (cartItems.includes(id)) {
+            setIsAddedToCart(true);
+        }
 
     }
+
     useEffect(() => {
         fetchProduct();
     })
+
+    const handleCart = () => {
+        if (!isAddedToCart) {
+            setQuantity((prev) => prev + 1);
+            setCartItems((prev) => [...prev, id]);
+            setIsAddedToCart(true);
+        }
+    }
+
     return (
         product.length === 0 ?
             <div role="status" className="flex justify-center align-middle h-screen">
@@ -33,7 +54,8 @@ const Product = () => {
                         <h1>{product.title}</h1>
                         <p className="">{product.description}</p>
                         <h3>${product.price}</h3>
-                        <button className="w-[20%] bg-[#3bd0d0] py-2">Add To Cart</button>
+                        <button className="w-[20%] bg-[#3bd0d0] py-2" onClick={handleCart} disabled={isAddedToCart}>{isAddedToCart ? "Added" : "Add To Cart"}</button>
+                        {isAddedToCart && <Button variant="contained" sx={{ width: "20%" }} onClick={() => navigate("/")}>Go Back</Button>}
                     </div>
                 </div>
             </div>

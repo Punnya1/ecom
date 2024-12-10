@@ -8,7 +8,7 @@ const Home = () => {
     const [products, setProducts] = useState([]);
 
     const [selected, setSelected] = useState("all");
-    const categories = ["all", "electronics", "jewellery", "men's clothing", "women's clothing"];
+    const categories = ["all", "electronics", "jewelery", "men's clothing", "women's clothing"];
 
 
     const fetchProductsByCategory = async (category) => {
