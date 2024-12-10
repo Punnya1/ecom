@@ -55,7 +55,7 @@ const Product = () => {
                         <p className="">{product.description}</p>
                         <h3>${product.price}</h3>
                         <button className="w-[20%] bg-[#3bd0d0] py-2" onClick={handleCart} disabled={isAddedToCart}>{isAddedToCart ? "Added" : "Add To Cart"}</button>
-                        {isAddedToCart && <Button variant="contained" sx={{ width: "20%" }} onClick={() => navigate("/")}>Go Back</Button>}
+                        {isAddedToCart && <Button variant="contained" sx={{ width: "20%" }} onClick={() => navigate("/checkout")}>CheckOut</Button>}
                     </div>
                 </div>
             </div>
